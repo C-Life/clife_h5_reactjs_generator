@@ -1,0 +1,29 @@
+{"host":"200.200.200.50","ready":{},
+"configData":{
+  "type" : "0",
+  "data" : {
+    "presetRuntimeM" : 0,
+    "dataSerial" : 0,
+    "dataType" : 0,
+    "reserve" : 0,
+    "updateFlag" : "00000001",
+    "orderMist" : 0,
+    "blue" : 255,
+    "red" : 255,
+    "green" : 255,
+    "_bindUserId" : 1388,
+    "presetOpenM" : 0,
+    "presetOpenH" : 0,
+    "orderBrightness" : 0,
+    "mist" : 1,
+    "orderRed" : 0,
+    "timeCloseH" : 0,
+    "orderBlue" : 0,
+    "timeCloseM" : 0,
+    "presetRuntimeH" : 0,
+    "brightness" : 0,
+    "mode" : 3,
+    "reserve1" : 0,
+    "orderGreen" : 0
+  }
+,"runningData":{}}

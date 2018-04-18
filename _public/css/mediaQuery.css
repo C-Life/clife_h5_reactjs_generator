@@ -1,0 +1,61 @@
+/*公共media query查询 1rem初始设置为12px
+dpr为2时对应750的效果图 dpr为3时对应1080的效果图
+查询区间间隔暂时设置为30px 对应3倍图时 1rem大小变化1px
+对于dpr为2的有额外百分之4.2增大的兼容*/
+@media screen and (max-width: 320px) {
+    html,body{font-size:62.5%}
+}
+@media screen and (min-width: 321px) and (max-width:350px) {
+    @media screen and (-webkit-min-device-pixel-ratio: 2){
+        html,body{font-size:71.62%}
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 3){
+        html,body{font-size:68.75%}
+    }
+}
+@media screen and (min-width: 351px) and (max-width:380px) {
+        html,body{font-size:75%}
+}
+@media screen and (min-width: 381px) and (max-width:410px) {
+    @media screen and (-webkit-min-device-pixel-ratio: 2){
+        html,body{font-size:84.64%}
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 3){
+        html,body{font-size:81.25%}
+    }
+}
+@media screen and (min-width: 411px) and (max-width:440px) {
+    @media screen and (-webkit-min-device-pixel-ratio: 2){
+        html,body{font-size:91.15%}
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 3){
+        html,body{font-size:87.5%}
+    }
+}
+@media screen and (min-width: 441px) and (max-width:470px) {
+    @media screen and (-webkit-min-device-pixel-ratio: 2){
+        html,body{font-size:97.66%}
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 3){
+        html,body{font-size:93.75%}
+    }
+}
+@media screen and (min-width: 471px) and (max-width:500px) {
+    @media screen and (-webkit-min-device-pixel-ratio: 2){
+        html,body{font-size:104.17%}
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 3){
+        html,body{font-size:100%}
+    }
+}
+@media screen and (min-width: 501px) and (max-width:539px) {
+    @media screen and (-webkit-min-device-pixel-ratio: 2){
+        html,body{font-size:110.68%}
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 3){
+        html,body{font-size:106.25%}
+    }
+}
+@media screen and (min-width: 540px) {
+    html,body{font-size: 150%}
+}

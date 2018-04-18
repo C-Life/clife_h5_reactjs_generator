@@ -1,0 +1,23 @@
+.ArcSliding {
+  display: block;
+  width: 18.625rem;
+  height: 18.625rem;
+  margin: 2.583333rem auto 0;
+  border: 1px solid pink;
+  border-radius: 50%;
+  /* background: url('../../static/img/simple.png') no-repeat; */
+  background-size: 100% 100%;
+  position: relative;
+}
+
+.ArcSliding>div {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  margin-left: -20px;
+  margin-top: -20px;
+  border-radius: 50%;
+  background: #ddd;
+  /* background: url('../../static/img/simple.png') no-repeat; */
+  background-size: 100% 100%;
+}

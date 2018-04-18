@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>虚拟app管理面板</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <div class="app-load">app名称：<input name="appPackName" type="text"> <input id="load-app" type="button" value="加载配置"></div>
+    <nav id="nav-wrap">
+        <a href="javascript:" for="sec1" class="active">基本配置</a>
+        <a href="javascript:" for="sec2">实时数据</a>
+        <a href="javascript:" for="sec3">控制数据</a>
+        <a href="javascript:" for="sec4">运行数据</a>
+    </nav>
+</header>
+<section id="sec1" class="active">
+    <p>基本配置</p>
+    <p>接口主机名：<input name="host" type="text" value="200.200.200.50"></p>
+    <p>accessToken：<input name="accessToken" type="text" style="width:300px"></p>
+    <p>ready数据：</p>
+    <p><textarea name="readydata" style="width:600px;height:120px;">{
+    
+}</textarea></p>
+    <p><input id="submit-base" type="button" value="提交基本配置" style="padding:10px"></p>
+</section>
+<section id="sec2">
+    <p>实时数据</p>
+    <p><textarea id="realdata" style="width:600px;height:300px;">{
+    
+}</textarea></p>
+    <p><input id="submit-realdata" type="button" value="发送实时数据" style="padding:10px"></p>
+</section>
+<section id="sec3">
+    <p>控制数据</p>
+    <p><textarea name="confdata" style="width:600px;height:300px;">{
+    
+}</textarea></p>
+    <p><input id="submit-conf" type="button" value="提交控制数据" style="padding:10px"></p>
+</section>
+<section id="sec4">
+    <p>运行数据  <input id="addrunn" type="button" value="添加一条"></p>
+    <div id="rundata-wrap">
+        <p><textarea name="runndata" style="width:600px;height:100px;">{
+    
+}</textarea></p>
+    </div>
+    <p><input id="submit-runn" type="button" value="提交运行数据" style="padding:10px"></p>
+</section>
+<footer>
+    <div id="dragarea"></div>
+    <div id="log-wrap"></div>
+</footer>
+<script src="zepto.min.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
