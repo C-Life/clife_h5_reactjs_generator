@@ -137,8 +137,16 @@ function zipProj() {
     var src = lineName + '/tmp/' + projName + '/';
     var dist = releaseDest + lineName + '/';
     return new Promise(function(resolve, reject) {
-        var s1 = 5;
+        var s1 = 6;
         cleanTemp();
+
+        //移动项目配置文件
+        gulp.src(path + '/projectCfg.json').
+        pipe(gulp.dest(src)).
+        on('end', function(){
+            console.log('>>> 移动项目配置文件.......................[done]');
+            if(--s1 === 0) resolve('done');
+        })
         // 移动其它静态文件
         gulp.src([path + 'static/**',
             '!' + path + 'static/js/**',
@@ -214,6 +222,10 @@ function zipProj() {
                 })).
                 // 修改为 ?v=stamp 形式
                 pipe(replace(/\-([0-9a-z]{8,})\.(mp4|avi|ogg|webm|swf)/g, function(a, b, c) {
+                    return '.' + c + '?v=' + b;
+                })).
+                // 修改为 ?v=stamp 形式
+                pipe(replace(/\-([0-9a-z]{8,})\.(json)/g, function(a, b, c) {
                     return '.' + c + '?v=' + b;
                 })).
                 pipe(gulp.dest(tmpPath + 'static/')).
