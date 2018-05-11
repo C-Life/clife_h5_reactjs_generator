@@ -1043,11 +1043,17 @@ body .markdown-body
 <li>显示导航栏菜单 <a href="#bar24">het.showNavigationBarMenuItem</a></li>
 <li>获取网络类型 <a href="#bar25">het.getNetworkType</a></li>
 <li>监听网络状态变化 <a href="#bar26">het.onNetworkStatusChange</a></li>
-<li>获取蓝牙设备的时间 <a href="#bar27">het.getBLERealTimeData</a></li>
-<li>获取蓝牙设备的历史数据 <a href="#bar28">het.getBLEHistoryData</a></li>
-<li>获取设备信息 <a href="#bar29">het.getDeviceInfo</a></li>
-<li>获取设备MCU升级 <a href="#bar30">het.getDeviceMcuUpgrade</a></li>
-<li>分享接口 <a href="#bar31">het.showShareActionSheet</a></li>
+<li>监听蓝牙连接状态变更 <a href="#bar27">het.listenBLEState</a></li>
+<li>监听蓝牙状态数据变更 <a href="#bar28">het.listenBLEStateData</a></li>
+<li>监听蓝牙电量状态变更 <a href="#bar29">het.listenBLEPower</a></li>
+<li>获取蓝牙设备的实时数据 <a href="#bar30">het.getBLERealTimeData</a></li>
+<li>获取蓝牙设备的历史数据 <a href="#bar31">het.getBLEHistoryData</a></li>
+<li>获取蓝牙设备的时间 <a href="#bar32">het.getBLETimeData</a></li>
+<li>设置蓝牙设备的时间 <a href="#bar33">het.setBLETimeData</a></li>
+<li>获取APP语言 <a href="#bar34">het.getAPPLanguage</a></li>
+<li>获取设备信息 <a href="#bar35">het.getDeviceInfo</a></li>
+<li>获取设备MCU升级 <a href="#bar36">het.getDeviceMcuUpgrade</a></li>
+<li>分享接口 <a href="#bar37">het.showShareActionSheet</a></li>
 </ol>
 <h3 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>功能接口</h3>
 <p>要使用该SDK，首先需要引入SDK文件<a href="_public/js/core/hetsdk.js">hetsdk.js</a>。引入该文件后，在js全局环境中将自动添加het对象，该对象相应的方法见下列接口说明。</p>
@@ -2466,10 +2472,10 @@ if (Object.keys(diffData).length&gt;0) {
 </code></pre>
 <hr />
 <p><span id="bar27"></span></p>
-<h4 id="27"><a name="user-content-27" href="#27" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>27. 获取蓝牙设备的时间</h4>
-<p>该方法用于获取APP蓝牙设备的时间</p>
+<h4 id="27"><a name="user-content-27" href="#27" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>27. 监听蓝牙连接状态变更</h4>
+<p>该方法用于监听APP蓝牙设备连接状态的变更</p>
 <h5 id="_90"><a name="user-content-_90" href="#_90" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>方法调用说明</h5>
-<pre><code>het.getBLERealTimeData(successCallbackId, failCallbackId)
+<pre><code>het.listenBLEState(callbackId)
 </code></pre>
 <h5 id="_91"><a name="user-content-_91" href="#_91" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>参数说明</h5>
 <table>
@@ -2483,16 +2489,10 @@ if (Object.keys(diffData).length&gt;0) {
 </thead>
 <tbody>
 <tr>
-<td>successCallbackId</td>
+<td>callbackId</td>
 <td align="center">是</td>
 <td>function</td>
 <td align="left">接口调用成功的回调函数</td>
-</tr>
-<tr>
-<td>failCallbackId</td>
-<td align="center">是</td>
-<td>function</td>
-<td align="left">接口调用失败的回调函数</td>
 </tr>
 </tbody>
 </table>
@@ -2510,19 +2510,58 @@ if (Object.keys(diffData).length&gt;0) {
 </thead>
 <tbody>
 <tr>
-<td>data</td>
+<td>bleStateType</td>
 <td align="center">是</td>
-<td>json</td>
-<td align="left">蓝牙设备的时间,十六制字符串</td>
+<td>string</td>
+<td align="left">蓝牙设备的连接状态</td>
+</tr>
+</tbody>
+</table>
+<p>bleStateType 有效值：</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td align="center">未连接</td>
+</tr>
+<tr>
+<td>1</td>
+<td align="center">连接中</td>
+</tr>
+<tr>
+<td>2</td>
+<td align="center">连接上</td>
+</tr>
+<tr>
+<td>3</td>
+<td align="center">连接失败</td>
+</tr>
+<tr>
+<td>4</td>
+<td align="center">设备端主动断开了连接</td>
+</tr>
+<tr>
+<td>5</td>
+<td align="center">设备重连中</td>
+</tr>
+<tr>
+<td>6</td>
+<td align="center">连接上并且认证成功</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <p><span id="bar28"></span></p>
-<h4 id="28"><a name="user-content-28" href="#28" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>28. 获取蓝牙设备的历史数据</h4>
-<p>该方法用于获取APP蓝牙设备的历史数据</p>
+<h4 id="28"><a name="user-content-28" href="#28" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>28. 监听蓝牙状态数据变更</h4>
+<p>该方法用于监听APP蓝牙设备数据状态的变更</p>
 <h5 id="_93"><a name="user-content-_93" href="#_93" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>方法调用说明</h5>
-<pre><code>het.getBLEHistoryData(successCallbackId, failCallbackId)
+<pre><code>het.listenBLEStateData(callbackId)
 </code></pre>
 <h5 id="_94"><a name="user-content-_94" href="#_94" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>参数说明</h5>
 <table>
@@ -2536,16 +2575,10 @@ if (Object.keys(diffData).length&gt;0) {
 </thead>
 <tbody>
 <tr>
-<td>successCallbackId</td>
+<td>callbackId</td>
 <td align="center">是</td>
 <td>function</td>
 <td align="left">接口调用成功的回调函数</td>
-</tr>
-<tr>
-<td>failCallbackId</td>
-<td align="center">是</td>
-<td>function</td>
-<td align="left">接口调用失败的回调函数</td>
 </tr>
 </tbody>
 </table>
@@ -2566,18 +2599,65 @@ if (Object.keys(diffData).length&gt;0) {
 <td>data</td>
 <td align="center">是</td>
 <td>json</td>
-<td align="left">蓝牙设备的历史数据,十六制字符串</td>
+<td align="left">蓝牙设备的状态数据</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <p><span id="bar29"></span></p>
-<h4 id="29"><a name="user-content-29" href="#29" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>29. 获取设备信息</h4>
-<p>该方法用于主动获取设备信息</p>
+<h4 id="29"><a name="user-content-29" href="#29" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>29. 监听蓝牙电量状态变更</h4>
+<p>该方法用于监听APP蓝牙电量状态的变更</p>
 <h5 id="_96"><a name="user-content-_96" href="#_96" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>方法调用说明</h5>
-<pre><code>het.getDeviceInfo(successCallbackId, failCallbackId)
+<pre><code>het.listenBLEPower(callbackId)
 </code></pre>
 <h5 id="_97"><a name="user-content-_97" href="#_97" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>参数说明</h5>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th align="center">是否必须</th>
+<th>字段类型</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>callbackId</td>
+<td align="center">是</td>
+<td>function</td>
+<td align="left">接口调用成功的回调函数</td>
+</tr>
+</tbody>
+</table>
+<h5 id="_98"><a name="user-content-_98" href="#_98" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>返回结果</h5>
+<p>该方法会调用APP的接口，APP会在回调函数中回传结果。</p>
+<h5 id="app_12"><a name="user-content-app_12" href="#app_12" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>APP回传参数说明</h5>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th align="center">是否必须</th>
+<th>字段类型</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>power</td>
+<td align="center">是</td>
+<td>string</td>
+<td align="left">蓝牙设备的电量</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><span id="bar30"></span></p>
+<h4 id="30"><a name="user-content-30" href="#30" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>30. 获取蓝牙设备的实时数据</h4>
+<p>该方法用于获取APP蓝牙设备的实时数据</p>
+<h5 id="_99"><a name="user-content-_99" href="#_99" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>方法调用说明</h5>
+<pre><code>het.getBLERealTimeData(successCallbackId, failCallbackId)
+</code></pre>
+<h5 id="_100"><a name="user-content-_100" href="#_100" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>参数说明</h5>
 <table>
 <thead>
 <tr>
@@ -2602,9 +2682,306 @@ if (Object.keys(diffData).length&gt;0) {
 </tr>
 </tbody>
 </table>
-<h5 id="_98"><a name="user-content-_98" href="#_98" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>返回结果</h5>
+<h5 id="_101"><a name="user-content-_101" href="#_101" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>返回结果</h5>
 <p>该方法会调用APP的接口，APP会在回调函数中回传结果。</p>
-<h5 id="app_12"><a name="user-content-app_12" href="#app_12" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>APP回传参数说明</h5>
+<h5 id="app_13"><a name="user-content-app_13" href="#app_13" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>APP回传参数说明</h5>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th align="center">是否必须</th>
+<th>字段类型</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td align="center">是</td>
+<td>json</td>
+<td align="left">蓝牙设备的实时数据</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><span id="bar31"></span></p>
+<h4 id="31"><a name="user-content-31" href="#31" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>31. 获取蓝牙设备的历史数据</h4>
+<p>该方法用于获取APP蓝牙设备的历史数据</p>
+<h5 id="_102"><a name="user-content-_102" href="#_102" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>方法调用说明</h5>
+<pre><code>het.getBLEHistoryData(successCallbackId, failCallbackId)
+</code></pre>
+<h5 id="_103"><a name="user-content-_103" href="#_103" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>参数说明</h5>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th align="center">是否必须</th>
+<th>字段类型</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>successCallbackId</td>
+<td align="center">是</td>
+<td>function</td>
+<td align="left">接口调用成功的回调函数</td>
+</tr>
+<tr>
+<td>failCallbackId</td>
+<td align="center">是</td>
+<td>function</td>
+<td align="left">接口调用失败的回调函数</td>
+</tr>
+</tbody>
+</table>
+<h5 id="_104"><a name="user-content-_104" href="#_104" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>返回结果</h5>
+<p>该方法会调用APP的接口，APP会在回调函数中回传结果。</p>
+<h5 id="app_14"><a name="user-content-app_14" href="#app_14" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>APP回传参数说明</h5>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th align="center">是否必须</th>
+<th>字段类型</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td align="center">是</td>
+<td>json</td>
+<td align="left">蓝牙设备的历史数据</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><span id="bar32"></span></p>
+<h4 id="32"><a name="user-content-32" href="#32" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>32. 获取蓝牙设备的时间</h4>
+<p>该方法用于获取APP蓝牙设备的时间</p>
+<h5 id="_105"><a name="user-content-_105" href="#_105" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>方法调用说明</h5>
+<pre><code>het.getBLETimeData(successCallbackId, failCallbackId)
+</code></pre>
+<h5 id="_106"><a name="user-content-_106" href="#_106" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>参数说明</h5>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th align="center">是否必须</th>
+<th>字段类型</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>successCallbackId</td>
+<td align="center">是</td>
+<td>function</td>
+<td align="left">接口调用成功的回调函数</td>
+</tr>
+<tr>
+<td>failCallbackId</td>
+<td align="center">是</td>
+<td>function</td>
+<td align="left">接口调用失败的回调函数</td>
+</tr>
+</tbody>
+</table>
+<h5 id="_107"><a name="user-content-_107" href="#_107" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>返回结果</h5>
+<p>该方法会调用APP的接口，APP会在回调函数中回传结果。</p>
+<h5 id="app_15"><a name="user-content-app_15" href="#app_15" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>APP回传参数说明</h5>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th align="center">是否必须</th>
+<th>字段类型</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>timeType</td>
+<td align="center">是</td>
+<td>string</td>
+<td align="left">蓝牙设备的时间</td>
+</tr>
+</tbody>
+</table>
+<p>timeType 有效值:</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td align="center">格林治时间</td>
+</tr>
+<tr>
+<td>1</td>
+<td align="center">本地时间(如北京时间)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><span id="bar33"></span></p>
+<h4 id="33"><a name="user-content-33" href="#33" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>33. 设置蓝牙设备的时间</h4>
+<p>该方法用于设置APP蓝牙设备的时间</p>
+<h5 id="_108"><a name="user-content-_108" href="#_108" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>方法调用说明</h5>
+<pre><code>het.setBLETimeData(successCallbackId, failCallbackId)
+</code></pre>
+<h5 id="_109"><a name="user-content-_109" href="#_109" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>参数说明</h5>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th align="center">是否必须</th>
+<th>字段类型</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>successCallbackId</td>
+<td align="center">是</td>
+<td>function</td>
+<td align="left">接口调用成功的回调函数</td>
+</tr>
+<tr>
+<td>failCallbackId</td>
+<td align="center">是</td>
+<td>function</td>
+<td align="left">接口调用失败的回调函数</td>
+</tr>
+</tbody>
+</table>
+<h5 id="_110"><a name="user-content-_110" href="#_110" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>返回结果</h5>
+<p>该方法会调用APP的接口，APP会在回调函数中回传结果。</p>
+<h5 id="app_16"><a name="user-content-app_16" href="#app_16" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>APP回传参数说明</h5>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th align="center">是否必须</th>
+<th>字段类型</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>timeType</td>
+<td align="center">是</td>
+<td>string</td>
+<td align="left">蓝牙设备的时间</td>
+</tr>
+</tbody>
+</table>
+<p>timeType 有效值:</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td align="center">格林治时间</td>
+</tr>
+<tr>
+<td>1</td>
+<td align="center">本地时间(如北京时间)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><span id="bar34"></span></p>
+<h4 id="34-app"><a name="user-content-34-app" href="#34-app" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>34. 获取APP语言</h4>
+<p>该方法用于获取APP语言</p>
+<h5 id="_111"><a name="user-content-_111" href="#_111" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>方法调用说明</h5>
+<pre><code>het.getAPPLanguage(callbackId)
+</code></pre>
+<h5 id="_112"><a name="user-content-_112" href="#_112" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>参数说明</h5>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th align="center">是否必须</th>
+<th>字段类型</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>callbackId</td>
+<td align="center">是</td>
+<td>function</td>
+<td align="left">接口调用成功的回调函数</td>
+</tr>
+</tbody>
+</table>
+<h5 id="_113"><a name="user-content-_113" href="#_113" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>返回结果</h5>
+<p>该方法会调用APP的接口，APP会在回调函数中回传结果。</p>
+<h5 id="app_17"><a name="user-content-app_17" href="#app_17" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>APP回传参数说明</h5>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th align="center">是否必须</th>
+<th>字段类型</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Language</td>
+<td align="center">是</td>
+<td>string</td>
+<td align="left">指定返回用户信息的语言，简体中文:zh_CN,繁体中文:zh_TW，英文:en 。默认为zh_CN</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><span id="bar35"></span></p>
+<h4 id="35"><a name="user-content-35" href="#35" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>35. 获取设备信息</h4>
+<p>该方法用于主动获取设备信息</p>
+<h5 id="_114"><a name="user-content-_114" href="#_114" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>方法调用说明</h5>
+<pre><code>het.getDeviceInfo(successCallbackId, failCallbackId)
+</code></pre>
+<h5 id="_115"><a name="user-content-_115" href="#_115" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>参数说明</h5>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th align="center">是否必须</th>
+<th>字段类型</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>successCallbackId</td>
+<td align="center">是</td>
+<td>function</td>
+<td align="left">接口调用成功的回调函数</td>
+</tr>
+<tr>
+<td>failCallbackId</td>
+<td align="center">是</td>
+<td>function</td>
+<td align="left">接口调用失败的回调函数</td>
+</tr>
+</tbody>
+</table>
+<h5 id="_116"><a name="user-content-_116" href="#_116" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>返回结果</h5>
+<p>该方法会调用APP的接口，APP会在回调函数中回传结果。</p>
+<h5 id="app_18"><a name="user-content-app_18" href="#app_18" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>APP回传参数说明</h5>
 <table>
 <thead>
 <tr>
@@ -2623,7 +3000,7 @@ if (Object.keys(diffData).length&gt;0) {
 </tr>
 </tbody>
 </table>
-<h5 id="_99"><a name="user-content-_99" href="#_99" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>范例</h5>
+<h5 id="_117"><a name="user-content-_117" href="#_117" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>范例</h5>
 <pre><code>    data:{
         "deviceId": "501D275D6CD840F39FF862CC9AE3ABBA",
         "macAddress": "5c313e08fc09",
@@ -2655,13 +3032,13 @@ if (Object.keys(diffData).length&gt;0) {
     }
 </code></pre>
 <hr />
-<p><span id="bar30"></span></p>
-<h4 id="30-mcu"><a name="user-content-30-mcu" href="#30-mcu" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>30. 获取设备MCU升级</h4>
+<p><span id="bar36"></span></p>
+<h4 id="36-mcu"><a name="user-content-36-mcu" href="#36-mcu" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>36. 获取设备MCU升级</h4>
 <p>该方法用于主动获取设备MCU升级</p>
-<h5 id="_100"><a name="user-content-_100" href="#_100" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>方法调用说明</h5>
+<h5 id="_118"><a name="user-content-_118" href="#_118" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>方法调用说明</h5>
 <pre><code>het.getDeviceMcuUpgrade(successCallbackId, failCallbackId)
 </code></pre>
-<h5 id="_101"><a name="user-content-_101" href="#_101" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>参数说明</h5>
+<h5 id="_119"><a name="user-content-_119" href="#_119" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>参数说明</h5>
 <table>
 <thead>
 <tr>
@@ -2686,9 +3063,9 @@ if (Object.keys(diffData).length&gt;0) {
 </tr>
 </tbody>
 </table>
-<h5 id="_102"><a name="user-content-_102" href="#_102" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>返回结果</h5>
+<h5 id="_120"><a name="user-content-_120" href="#_120" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>返回结果</h5>
 <p>该方法会调用APP的接口，APP会在回调函数中回传结果。</p>
-<h5 id="app_13"><a name="user-content-app_13" href="#app_13" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>APP回传参数说明</h5>
+<h5 id="app_19"><a name="user-content-app_19" href="#app_19" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>APP回传参数说明</h5>
 <table>
 <thead>
 <tr>
@@ -2707,20 +3084,20 @@ if (Object.keys(diffData).length&gt;0) {
 </tr>
 </tbody>
 </table>
-<h5 id="_103"><a name="user-content-_103" href="#_103" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>范例</h5>
+<h5 id="_121"><a name="user-content-_121" href="#_121" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>范例</h5>
 <pre><code>    data:{
         progress:0, //number 升级的进度
         error:xxx, //string 发生错误的信息
     }
 </code></pre>
 <hr />
-<p><span id="bar31"></span></p>
-<h4 id="31"><a name="user-content-31" href="#31" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>31. 分享接口</h4>
+<p><span id="bar37"></span></p>
+<h4 id="37"><a name="user-content-37" href="#37" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>37. 分享接口</h4>
 <p>该方法用于打开APP的分享功能</p>
-<h5 id="_104"><a name="user-content-_104" href="#_104" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>方法调用说明</h5>
+<h5 id="_122"><a name="user-content-_122" href="#_122" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>方法调用说明</h5>
 <pre><code>het.showShareActionSheet(title, content, images, url, successCallbackId, failCallbackId, completeCallbackId)
 </code></pre>
-<h5 id="_105"><a name="user-content-_105" href="#_105" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>参数说明</h5>
+<h5 id="_123"><a name="user-content-_123" href="#_123" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>参数说明</h5>
 <table>
 <thead>
 <tr>
@@ -2775,9 +3152,9 @@ if (Object.keys(diffData).length&gt;0) {
 </tr>
 </tbody>
 </table>
-<h5 id="_106"><a name="user-content-_106" href="#_106" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>返回结果</h5>
+<h5 id="_124"><a name="user-content-_124" href="#_124" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>返回结果</h5>
 <p>该方法会调用APP的接口，APP会在回调函数中回传结果。</p>
-<h5 id="app_14"><a name="user-content-app_14" href="#app_14" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>APP回传参数说明</h5>
+<h5 id="app_20"><a name="user-content-app_20" href="#app_20" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>APP回传参数说明</h5>
 <table>
 <thead>
 <tr>
@@ -2796,7 +3173,7 @@ if (Object.keys(diffData).length&gt;0) {
 </tr>
 </tbody>
 </table>
-<h5 id="_107"><a name="user-content-_107" href="#_107" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>范例</h5>
+<h5 id="_125"><a name="user-content-_125" href="#_125" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>范例</h5>
 <pre><code>    data:{
         sharePlatformType:0, //string 分享的平台
         error:xxx, //string 发生错误的信息
