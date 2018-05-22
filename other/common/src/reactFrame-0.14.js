@@ -1,1 +1,0 @@
-require('../../../_public/js/reactFrame-0.14.js');

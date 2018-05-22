@@ -14,9 +14,29 @@ het.domReady(()=>{
     });
 });
 
-// 接收app推送数据
-het.repaint((data, type)=>{
-    Actions.repaint(data, type);
+// 接收app推送的运行数据
+het.updateRunData((data)=>{
+    Actions.updateRunData(data);
+});
+
+// 接收app推送的控制数据
+het.updateControlData((data)=>{
+    Actions.updateControlData(data);
+});
+
+// 接收app推送的故障数据
+het.updateErrorData((data)=>{
+    Actions.updateErrorData(data);
+});
+
+// 接收app推送的配置数据
+het.updateConfigData((data)=>{
+    Actions.updateConfigData(data);
+});
+
+// 接收app推送的在线离线状态
+het.updateOnOffState((data)=>{
+    Actions.updateOnOffState(data);
 });
 
 // 创建React组件

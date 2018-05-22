@@ -5,5 +5,9 @@
  */
 
 export const Actions = Reflux.createActions([
-    'repaint', // 接收到数据，重新渲染
+    'updateRunData', // 接收到运行数据，重新渲染
+    'updateControlData', // 接收到控制数据，重新渲染
+    'updateErrorData', // 接收到故障数据，重新渲染
+    'updateConfigData', // 接收到配置数据，重新渲染
+    'updateOnOffState', // 接收到在线离线状态，重新渲染
 ]);

@@ -8,7 +8,21 @@ import {Actions} from './Actions.es6';
 
 export const Store = Reflux.createStore({
     listenables: [Actions],
-    onRepaint(data, type){
+    onUpdateRunData(data){
+        this.trigger(data);
+    },
+    onUpdateControlData(data){
+        this.trigger(data);
+    },
+    onUpdateErrorData(data){
+        this.trigger(data);
+    },
+    onUpdateConfigData(data){
+        this.trigger(data);
+    },
+    onUpdateOnOffState(data){
+        // data.onlineStatus 离线在线状态
+        // 0 设备不在线 1 设备在线
         this.trigger(data);
     }
 });
