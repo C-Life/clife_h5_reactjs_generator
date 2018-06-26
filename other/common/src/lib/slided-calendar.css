@@ -1,0 +1,136 @@
+.slided-calendar{
+    position:absolute;
+    left:0;
+    right:0;
+    padding-top:40px;
+    padding-bottom:48px;
+    z-index:9999;
+    background-color:#fff;
+    overflow:auto;
+    text-align:center;
+    font-size:14px;
+    line-height:2.5rem;
+    color:#303030;
+}
+.slided-calendar .sc-row>li{
+    display:block;            /* OLD */
+    width:100%;               /* OLD */
+}
+.slided-calendar .sc-row{
+    display:-webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display:-moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display:-ms-flexbox;      /* TWEENER - IE 10 */
+    display:-webkit-flex;     /* NEW - Chrome */
+    display:flex;
+    -webkit-box-orient:horizontal;  /* OLD */
+    -moz-box-orient:horizontal;     /* OLD */
+    -ms-box-orient:horizontal;      /* OLD */
+    -webkit-flex-flow:row;
+    -moz-flex-flow:row;
+    -ms-flex-flow:row;
+    flex-flow:row;
+}
+.slided-calendar h2{
+    margin-top:10px;
+}
+.slided-calendar .sc-row>li{
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;         /* OLD - Firefox 19- */
+    -webkit-flex: 1;          /* Chrome */
+    -ms-flex: 1;              /* IE 10 */
+    flex: 1;
+}
+.slided-calendar .sc-row>li{
+    position:relative;
+    border-top:1px solid #c6c6c6;
+    margin-bottom:10px;
+    color:#c6c6c6;
+}
+.slided-calendar .sc-row>li.sc-vali{
+    color:#303030;
+}
+.slided-calendar .sc-row>li.sc-today{
+    color:#19b6c2;
+}
+.slided-calendar .sc-row>li.sc-e{
+    border-top-color:#fff;
+}
+.slided-calendar .sc-row>li>i{
+    display:inline-block;
+    width:2.5rem;
+    line-height:2.5rem;
+    border-radius:50%;
+}
+.slided-calendar .sc-row>li.sc-among{
+    background-color:#ffc85e;
+    color:#fff;
+}
+.slided-calendar .sc-row>li.sc-start::after{
+    content:'.';
+    position:absolute;
+    right:0;
+    display:inline-block;
+    width:50%;
+    background-color:#ffc85e;
+    z-index:0;
+}
+.slided-calendar .sc-row>li.sc-start>i{
+    position:relative;
+    background-color:#ff9a23;
+    color:#fff;
+    z-index:1;
+}
+.slided-calendar .sc-row>li.sc-end::after{
+    content:'.';
+    position:absolute;
+    left:0;
+    display:inline-block;
+    width:50%;
+    background-color:#ffc85e;
+    z-index:0;
+}
+.slided-calendar .sc-row>li.sc-end>i{
+    position:relative;
+    background-color:#ff9a23;
+    color:#fff;
+    z-index:1;
+}
+
+.slided-calendar .sc-row.head{
+    position:fixed;
+    top:0;
+    width:100%;
+    background-color:#e4f3f4;
+    line-height:30px;
+    z-index:9999;
+}
+.slided-calendar>.sc-footer{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    display:-webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display:-moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display:-ms-flexbox;      /* TWEENER - IE 10 */
+    display:-webkit-flex;     /* NEW - Chrome */
+    display:flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    z-index:9999;
+}
+.slided-calendar>.sc-footer>a{
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;         /* OLD - Firefox 19- */
+    -webkit-flex: 1;          /* Chrome */
+    -ms-flex: 1;              /* IE 10 */
+    flex: 1;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    line-height:48px;
+    background-color:#aaa;
+    color:#fff;
+    text-align:center;
+    font-size:18px;
+}
+.slided-calendar>.sc-footer>a.enable{
+    background-color:#3cc6d1;
+    color:#fff;
+}
+.slided-calendar>.sc-footer>a:active{
+    background-color:#26b5c0;
+}

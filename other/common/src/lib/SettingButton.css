@@ -1,0 +1,33 @@
+/* settingbtn */
+/*保存设置按钮组件*/
+.settingbtn-on{
+    background-color:#fafafa;
+    line-height:49px;
+    height:49px;
+    text-align: center;
+    border-top: 1px solid #dadada;
+    color:#f45a4f;
+}
+.settingbtn-on>em,.settingbtn-active>em{
+    font-size: 17px;
+}
+.settingbtn-off{
+    background-color:#fafafa;
+    line-height:49px;
+    height:49px;
+    text-align: center;
+    border-top: 1px solid #dadada;
+}
+.settingbtn-off>em{
+    font-size: 17px;
+    color:#f45a4f;
+    opacity: 0.4;
+}
+.settingbtn-active{
+    background-color:#f45a4f;
+    line-height:49px;
+    height:49px;
+    text-align: center;
+    border-top: 1px solid #dadada;
+    color:#ffffff;
+}
