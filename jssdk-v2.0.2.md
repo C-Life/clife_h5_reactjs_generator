@@ -41,6 +41,12 @@
 37. 获取设备信息 [het.getDeviceInfo](#bar37)
 38. 获取设备MCU升级 [het.getDeviceMcuUpgrade](#bar38)
 39. 分享接口 [het.showShareActionSheet](#bar39)
+40. 获取APP当前的地理位置信息 [het.userLocation](#bar40)
+41. 监听蓝牙适配器状态变化事件 [het.onBluetoothAdapterStateChange](#bar41)
+42. 获取当前蓝牙适配器状态 [het.getBluetoothAdapterState](#bar42)
+43. H5端调用APP方法实现http请求 [het.proxyHttpWithHet](#bar43)
+44. H5端调用业务线的终端自扩展的接口 [het.selfExtendFunc](#bar44)
+45. H5监听原⽣视图显示/消失 [het.listenViewAppear](#bar45)
 
 ### 功能接口
 
@@ -1076,3 +1082,136 @@ timeType 有效值:
 |SocialPlatformType_Qzone              = 5|qq空间|
 |SocialPlatformType_TencentWb          = 6|腾讯微博|
 |SocialPlatformType_AlipaySession      = 7|支付宝聊天页面|
+
+***********************************************************************
+
+<span id="bar40"></span>
+#### 40. 获取APP当前的地理位置信息
+
+##### 方法调用说明
+    het.userLocation(type,altitude,sucCallback,failCallback,completeCallback)
+
+##### 参数说明
+|    参数名称    | 是否必须 | 字段类型 |  参数说明
+|:--------:|:--------:|:----------:|:-----------
+| type    |    否    | String   | 默认为 wgs84 返回 GPS 坐标；gcj02 返回国测局坐标
+| altitude  |    是   | Boolean  | 传入 true 会返回高度信息，由于获取高度需要较高精确度，会减慢接口返回速度
+| sucCallback  |    是    | function  | 接口调用成功的回调函数
+| failCallback  |    否    | function   | 接口调用失败的回调函数
+| completeCallback |   否    | function | 接口调用结束的回调函数（调用成功、失败都会执行）
+
+##### 返回结果
+该方法会调用APP的接口，APP会在回调函数中回传结果。
+
+***********************************************************************
+
+<span id="bar41"></span>
+#### 41. 监听蓝牙适配器状态变化事件
+
+##### 方法调用说明
+    het.onBluetoothAdapterStateChange(sucCallback,failCallback,completeCallback)
+
+##### 参数说明
+|    参数名称    | 是否必须 | 字段类型 |  参数说明
+|:--------:|:--------:|:----------:|:-----------
+| sucCallback  |    是    | function  | 接口调用成功的回调函数
+| failCallback  |    是    | function   | 接口调用失败的回调函数
+| completeCallback |   否    | function | 接口调用结束的回调函数（调用成功、失败都会执行）
+
+##### 返回结果
+该方法会调用APP的接口，APP会在回调函数中回传结果。
+
+***********************************************************************
+
+<span id="bar42"></span>
+#### 42. 获取当前蓝牙适配器状态
+
+##### 方法调用说明
+    het.getBluetoothAdapterState(sucCallback,failCallback,completeCallback)
+
+##### 参数说明
+|    参数名称    | 是否必须 | 字段类型 |  参数说明
+|:--------:|:--------:|:----------:|:-----------
+| sucCallback  |    是    | function  | 接口调用成功的回调函数
+| failCallback  |    是    | function   | 接口调用失败的回调函数
+| completeCallback |   否    | function | 接口调用结束的回调函数（调用成功、失败都会执行）
+
+##### 返回结果
+该方法会调用APP的接口，APP会在回调函数中回传结果。
+
+***********************************************************************
+
+<span id="bar43"></span>
+#### 43. H5端调用APP方法实现http请求
+
+##### 方法调用说明
+    het.proxyHttpWithHet(host,path,paramJson,sucCallback,failCallback)
+
+##### 参数说明
+|    参数名称    | 是否必须 | 字段类型 |  参数说明
+|:--------:|:--------:|:----------:|:-----------
+| host  |    是    | String  | http请求地址
+| path  |    是    | String  | http接口的path
+| paramJson  |    是    | json  | 配置http参数，以及http请求参数
+| sucCallback  |    是    | function  | 接口调用成功的回调函数
+| failCallback  |    是    | function   | 接口调用失败的回调函数
+
+##### 返回结果
+该方法会调用APP的接口，APP会在回调函数中回传结果。
+
+***********************************************************************
+
+<span id="bar44"></span>
+#### 44. H5端调用业务线的终端自扩展的接口
+
+##### 方法调用说明
+    het.selfExtendFunc(funcnam,argarr,backfuncarr)
+
+##### 参数说明
+|    参数名称    | 是否必须 | 字段类型 |  参数说明
+|:--------:|:--------:|:----------:|:-----------
+| funcnam  |    是    | String  | 扩展接口名
+| argarr  |    是    | Array  | 扩展接口需要传的参数键值对数组，参见注释44-argarr
+| backfuncarr  |    是    | Array  | 扩展接口的回调函数数组，参见注释44-backfuncarr
+
+###### 注释44-argarr: 可为空数组,或者形如：[{a:b},...]，其中：
+|    自定义项    | 是否必须 | 字段类型 |  参数说明
+|:--------:|:--------:|:----------:|:-----------
+| a  |    是    | String  | 参数字段名,来自app
+| b  |    是    | String  | 参数字段值,来自H5
+###### 注释44-backfuncarr: 可为空数组,或者形如： [ { idnam:"successCallback", func:()=>{}, expire:"60000" },.... ]，其中：
+|    参数名称    | 是否必须 | 字段类型 |  参数值说明
+|:--------:|:--------:|:----------:|:-----------
+| idnam  |    是    | String  |  自定义的回调函数名,如："successCallback"
+| func  |    是    | function  | 回调函数体
+| expire  |  否    | String  | 设置回调函数有效期,默认值30000,即30秒,也可设为字符串"forever"表示永久有效不做回收
+
+##### 返回结果
+该方法会调用APP的接口，APP会在回调函数中回传结果。
+##### 范例
+```javascript
+
+var argarr = [{"jumpNativePage":"abc"}],
+    backfuncarr = [
+        {idnam:"successCallbackId",func:data=>{console.log("===>>>success, data: "+data);}},
+        {idnam:"errorCallbackId",func:data=>{console.log("===>>>fail, data: "+data);}}
+    ];
+het.selfExtendFunc('jumpNativePage',argarr,backfuncarr);
+
+```
+
+***********************************************************************
+
+<span id="bar45"></span>
+#### 45. H5监听原⽣视图⽣命周期
+
+##### 方法调用说明
+    het.listenViewAppear(type,callback)
+
+##### 参数说明
+|    参数名称    | 是否必须 | 字段类型 |  参数说明
+|:--------:|:--------:|:----------:|:-----------
+| type  |    是    | Number  | 枚举：1 原生视图显示，  0 原生视图消失
+| callback  |    是    | function  | 监听到原生视图生命周期改变时的回调函数
+
+
